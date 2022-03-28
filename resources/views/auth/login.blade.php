@@ -1,73 +1,108 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+@include('layouts.head')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<body>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <div class="body">
+     @include('layouts.header2')
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+        <div role="main" class="main">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+            {{-- @include('layouts.breadcrumb',['pagina'=>'Registrarse']) --}}
+            <section class="page-header page-header-classic">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                           
                         </div>
+                    </div>
+                    <div class="row">
+                       
+                    </div>
+                </div>
+            </section>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="featured-boxes">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="featured-box featured-box-primary text-left mt-5">
+                                        <div class="box-content">
+                                            <h4 class="color-primary font-weight-semibold text-4 text-uppercase mb-3">
+                                                SOY CLIENTE</h4>
+                                            <form method="POST" action="{{ route('login') }}" id="frmSignIn" class="needs-validation">
+                                                @csrf
+                                                <div class="form-row">
+                                                    <div class="form-group col">
+                                                        <label class="font-weight-bold text-dark text-2">Correo electrónico</label>
+                                                        <input  id="email" type="email" value="{{ old('email') }}"  name="email"
+                                                            class="form-control form-control-lg @error('email') is-invalid @enderror" autocomplete="email" required>
+                                                            @error('email')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col">
+                                                        {{-- <a class="float-right" href="#">(Lost Password?)</a> --}}
+                                                        <label
+                                                            class="font-weight-bold text-dark text-2">Contraseña</label>
+                                                        <input id="password" type="password" name="password" 
+                                                            class="form-control form-control-lg @error('password') is-invalid @enderror" autocomplete="current-password" required>
+                                                            @error('password')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                        </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-lg-6">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                            name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} >
+                                                            <label class="custom-control-label text-2"
+                                                                for="rememberme">Recordarme</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <input type="submit" value="Iniciar sesión"
+                                                            class="btn btn-primary btn-modern float-right"
+                                                            data-loading-text="Loading...">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="featured-box featured-box-primary text-left mt-5">
+                                        <div class="box-content">
+                                            
+                                            <h4 class="color-primary font-weight-semibold text-4 text-uppercase mb-3">Si no posees una cuenta para acceder a los servicios de COLPOMED, deberás realizar una consulta previa en nuestras instalaciones donde se te ayudará con el registro correspondiente.</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
+
             </div>
+
         </div>
+
+        @include('layouts.footer')
     </div>
-</div>
-@endsection
+
+   @include('layouts.scripts')
+
+</body>
+
+</html>

@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Guayaquil',
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -176,7 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        //AQUI SE AGREGAN LOS SERVICIOS QUE SERAN CONSUMIDOS DE LIBRERIAS EXTERNAS
+        Spatie\Permission\PermissionServiceProvider::class,
+        //SWEETALERT 
     ],
 
     /*
