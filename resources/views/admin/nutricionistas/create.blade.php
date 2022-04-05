@@ -18,8 +18,9 @@
             <div class="card-body">
                 <h4 class="card-title">Datos nutricionista</h4>
                
-                <form method="POST" action="{{route('nutricionista.store')}}" class="forms-sample">
+                <form method="POST" action="{{route('nutricionista.store')}}" class="forms-sample" enctype="multipart/form-data">
                     @csrf
+                   
                     <div class="form-group row">
                         <label for="exampleInputUsername2"
                             class="col-sm-3 col-form-label">Nombre</label>
@@ -44,6 +45,19 @@
                                 placeholder="">
                         </div>
                     </div>
+
+
+            
+
+                    <div class="form-group row">
+                        <label for="exampleInputUsername2"
+                            class="col-sm-3 col-form-label">Especialidad</label>
+                        <div class="col-sm-9">
+                            <input  name="especialidad" type="text" class="form-control" id="exampleInputUsername2"
+                                placeholder="Especialidad">
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <label for="exampleInputMobile"
                             class="col-sm-3 col-form-label">Teléfono</label>
@@ -69,6 +83,14 @@
                         </div>
                     </div>
                     
+                    <div class="form-group row">
+                        <label for="exampleInputPassword2"
+                            class="col-sm-3 col-form-label">Foto</label>
+                        <div class="col-sm-9">
+                            <input name="imagen" type="file" class="form-control"
+                                id="exampleInputPassword2" >
+                        </div>
+                    </div>
                   
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                     <button class="btn btn-light">Cancel</button>

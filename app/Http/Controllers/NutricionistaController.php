@@ -7,6 +7,7 @@ use App\Models\Nutricionista;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreNutricionistaRequest;
 use App\Http\Requests\UpdateNutricionistaRequest;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class NutricionistaController extends Controller
 {
@@ -31,23 +32,38 @@ class NutricionistaController extends Controller
         return view('admin.nutricionistas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreNutricionistaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
     {
+        // dd($request);
         $hashpass = Hash::make($request->password);
-        Nutricionista::create([
+        $nutricionista = Nutricionista::create([
             "nombre"=>$request->nombre,
             "apellido"=>$request->apellido,
             "cedula"=>$request->cedula,
             "telefono"=>$request->telefono,
             "correo"=>$request->correo,
             "password"=>$hashpass,
+            "especialidad"=>$request->especialidad
         ]);
+
+        
+        if ($request->hasFile('imagen')) {
+            $url = "";
+            $file = $request->imagen;
+            $elemento = Cloudinary::upload($file->getRealPath(), ['folder' => 'nutricionista']);
+            // dd($elemento);
+            $public_id = $elemento->getPublicId();
+            $url = $elemento->getSecurePath();
+        }
+
+        $nutricionista->imagen()->create([
+            "url" => $url,
+            "public_id" => $public_id
+        ]);
+
+
+
         return back();
     }
 

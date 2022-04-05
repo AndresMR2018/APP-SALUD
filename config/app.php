@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         //AQUI SE AGREGAN LOS SERVICIOS QUE SERAN CONSUMIDOS DE LIBRERIAS EXTERNAS
         Spatie\Permission\PermissionServiceProvider::class,
+        CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
         //SWEETALERT 
     ],
 
@@ -193,7 +194,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+        'Cloudinary' => CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class,
     ])->toArray(),
 
 ];

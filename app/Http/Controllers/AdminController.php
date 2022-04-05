@@ -15,10 +15,22 @@ class AdminController extends Controller
     //    return view('admin.administradores.index',compact('admins'));
     // }
 
+    public function listarPacientes()
+    {
+        $pacientes = User::role('Cliente')->get();
+        return view('admin.paciente.index',compact('pacientes'));
+    }
+
+  
+
+   
+
     public function dashboard()
     {
         return view('admin.dashboard');
     }
+
+   
 
     public function listar(){
         $admins = User::role('Administrador')->get();

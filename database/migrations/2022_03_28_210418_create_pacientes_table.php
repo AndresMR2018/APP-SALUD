@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nutricionistas', function (Blueprint $table) {
+        Schema::create('pacientes', function (Blueprint $table) {
             $table->id();
+            $table->string('cedula',10);//longitud definida en 10 caracteres
             $table->string('nombre');
+            $table->integer('edad');
             $table->string('apellido');
-            $table->string('cedula');
-            $table->text('especialidad');
             $table->string('telefono');
-            $table->string('correo');
+            $table->decimal('tipo_diabetes');// 1: 2 : 3:estacional 
+            $table->string('email')->unique();
             $table->string('password');
-            $table->timestamps();
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nutricionistas');
+        Schema::dropIfExists('pacientes');
     }
 };

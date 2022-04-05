@@ -15,5 +15,10 @@ class Nutricionista extends Model
         "telefono",
         "correo",
         "password",
+        "especialidad",
     ];
+
+    public function imagen(){
+        return $this->morphOne(Imagen::class, 'imageable');
+    }
 }

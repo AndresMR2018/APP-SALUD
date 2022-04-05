@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 
 <head>
@@ -18,7 +18,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('administracion/css/style.css') }}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="http://www.urbanui.com/" />
+    <link rel="shortcut icon" class="img-thumbnail img-fluid" href="{{asset('img/favicon.png')}}">
 </head>
 {{-- @include('layouts.head') --}}
 
@@ -27,10 +27,10 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="index-2.html"><img
-                        src="{{ asset('administracion/images/logo.svg') }}" alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index-2.html"><img
-                        src="{{ asset('administracion/images/logo-mini.svg') }}" alt="logo" /></a>
+                <a class="navbar-brand brand-logo" href="index-2.html"><img 
+                        src="{{ asset('img/logos/nutriday_descrip.png') }}" alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" href=""><img
+                        src="{{asset('img/favicon.png')}}" alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-stretch">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -478,6 +478,23 @@
                                 <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route('nutricionista.create')}}">Agregar
                                         nutricionista</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{route('nutricionista.index')}}">Ver nutricionistas</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#page-layouts3" aria-expanded="false"
+                            aria-controls="page-layouts">
+                            <i class="fab fa-trello menu-icon"></i>
+                            <span class="menu-title">Pacientes</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="page-layouts3">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{{route('paciente.create')}}">Agregar
+                                    paciente</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('paciente.index')}}">Ver pacientes</a>
                                 </li>
                             </ul>
                         </div>

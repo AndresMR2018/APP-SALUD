@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('nutricionistas', function (Blueprint $table) {
+        Schema::create('datos_antropometricos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->string('cedula');
-            $table->text('especialidad');
-            $table->string('telefono');
-            $table->string('correo');
-            $table->string('password');
+            $table->decimal('altura');
+            $table->decimal('peso');
+            $table->string('sexo');
+            $table->unsignedBigInteger('paciente_id');
+            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nutricionistas');
+        Schema::dropIfExists('datos_antropometricos');
     }
 };
