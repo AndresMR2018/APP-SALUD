@@ -13,6 +13,7 @@ class DatosAntropometrico extends Model
         "altura",
         "peso",
         "sexo",
+        "imc",
         "paciente_id",
     ];
 

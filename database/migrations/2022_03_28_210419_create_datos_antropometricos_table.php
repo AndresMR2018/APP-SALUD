@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('altura');
             $table->decimal('peso');
             $table->string('sexo');
+            $table->decimal('imc');
             $table->unsignedBigInteger('paciente_id');
             $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

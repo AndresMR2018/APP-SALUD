@@ -37,22 +37,35 @@
 
                     <div class="form-group row">
                         <label for="exampleInputUsername2"
-                            class="col-sm-3 col-form-label">Peso</label>
+                            class="col-sm-3 col-form-label">Peso (Kg)</label>
                         <div class="col-sm-9">
-                            <input name="peso" type="text"
+                            <input name="peso" type="number"
                                  class="form-control"
-                                id="exampleInputUsername2">
+                                id="peso">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="exampleInputUsername2"
-                            class="col-sm-3 col-form-label">Altura</label>
+                            class="col-sm-3 col-form-label">Altura (Mts)</label>
                         <div class="col-sm-9">
-                            <input name="altura" type="text"
+                            <input name="altura" step="0.05" type="number"
                                 
-                                class="form-control" id="exampleInputUsername2">
+                                class="form-control" id="altura">
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="exampleInputUsername2"
+                            class="col-sm-3 col-form-label">IMC: </label>
+                        <div class="col-sm-9">
+                            <input  type="number" disabled
+                                
+                                class="form-control" id="imc">
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="imc" id="imc2" >
+
                   
                     
                     
@@ -75,4 +88,28 @@
 
   
 </div>
+
+<script>
+
+    function obtenerPeso(e){
+        let value = e.target.value;
+        // return value;
+    }
+    function obtenerAltura(e){
+        let value = e.target.value;
+        // return value;
+        if(document.getElementById('peso').value != null){
+            let imc = document.getElementById('peso').value/(value*value);
+           document.getElementById('imc').value = imc.toFixed(2);
+           document.getElementById('imc2').value = imc.toFixed(2);
+        }
+    }
+
+
+
+document.addEventListener('DOMContentLoaded',function(){
+    document.getElementById('peso').addEventListener('change',obtenerPeso);
+    document.getElementById('altura').addEventListener('change',obtenerAltura);
+})
+</script>
 @endsection

@@ -4,50 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StorePacienteRequest;
 use App\Http\Requests\UpdatePacienteRequest;
+use App\Models\DatosAntropometrico;
 
 class PacienteController extends Controller
 {
    
     public function index()
     {
+        // $lastRecordDate = DatosAntropometrico::all()->sortByDesc('created_at')->take(1)->toArray();
+        // dd($lastRecordDate);
+        $imcs = DB::table('datos_antropometricos')->select('imc')->latest()->get();
+        $sexos = DB::table('datos_antropometricos')->select('sexo')->latest()->get();
+        $alturas = DB::table('datos_antropometricos')->select('altura')->latest()->get();
+        $pesos = DB::table('datos_antropometricos')->select('peso')->latest()->get();
+ 
         $pacientes = Paciente::all();
 
-      foreach($pacientes as $key => $paciente)
-    {
-        // $cant = $paciente->dato_antropometrico;
-       
-    //     $imcs = collect();
-    //    $data =  $paciente->dato_antropometrico->last();
-    //    $coleccion = collect($data);
-    // $arrayimcs = array();
-    $imcs = collect();
-    $cant = count($paciente->dato_antropometrico);//longitud de la collecion-> ultima posicion
-    // dd($paciente->dato_antropometrico);  
-    // print($cant);
-    foreach($paciente->dato_antropometrico as $key => $dato)
-        {
-            // print($dato);
-          
-            if($key+1 == $cant){
-                
-               $res = $dato->peso/($dato->altura*$dato->altura);
-               print("           ".$res);
-            $imcs->push($res);
-                $res = 0;
-            }
-      
-        }
-       
-    }
-    dd($imcs[1]);
-    // print($imcs);
-    dd("hola");
-    
-
-        return view('admin.paciente.index',compact('pacientes','imcs'));
+        return view('admin.paciente.index',compact('pacientes','imcs','sexos','alturas','pesos'));
     }
 
     
@@ -104,16 +81,21 @@ class PacienteController extends Controller
 
     public function guardarDatosAntropometricos(Request $request)
     {
+        // dd($request);
+
+       
+
         $paciente = Paciente::find($request->id_paciente);
 
         $paciente->dato_antropometrico()->create([
             "altura"=>$request->altura,
             "peso"=>$request->peso,
             "sexo"=>$request->sexo,
+            "imc"=>$request->imc,
             "paciente_id"=>$request->id_paciente,
         ]);
 
-        dd($paciente);
+        // dd($paciente);
 
        
         return redirect()->route('paciente.index');

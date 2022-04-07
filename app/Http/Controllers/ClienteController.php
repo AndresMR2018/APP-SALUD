@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
@@ -16,6 +18,15 @@ class ClienteController extends Controller
         return view('client.dashboard');
     }
 
+
+    
+    public function miCuenta()
+    {
+        
+        // $paciente = Paciente::find(Auth::id());
+        // dd($paciente);
+        return view('client.cuenta','paciente');
+    }
  
     public function create()
     {

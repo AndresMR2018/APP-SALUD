@@ -24,22 +24,27 @@ class User extends Authenticatable
         "telefono",
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pacientes()
+    {
+        return $this->hasMany(Paciente::class);
+    }
+
+    public function administradores()
+    {
+        return $this->hasMany(Admin::class);
+    }
+
+    public function nutricionistas()
+    {
+        return $this->hasMany(Nutricionista::class);
+    }
 }

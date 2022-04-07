@@ -10,9 +10,7 @@ class Paciente extends Model
 {
     use HasFactory, HasRoles;
 
-    public function guardName(){
-        return "web";
-    }
+    protected $guard_name = 'web';
 
     public $fillable=[
         "nombre",
@@ -26,6 +24,13 @@ class Paciente extends Model
     ];
 
     public $timestamps = false;
+
+
+    
+    public function imagen(){
+        return $this->morphOne(Imagen::class, 'imageable');
+    }
+
 
     public function dato_antropometrico()
     {

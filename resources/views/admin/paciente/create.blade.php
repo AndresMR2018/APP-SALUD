@@ -18,7 +18,7 @@
             <div class="card-body">
                 <h4 class="card-title">Datos paciente</h4>
                
-                <form method="POST" action="{{route('paciente.store')}}" class="forms-sample">
+                <form method="POST" action="{{route('paciente.store')}}" enctype="multipart/form-data" class="forms-sample">
                     @csrf
                     
                     <div class="form-group row">
@@ -93,7 +93,7 @@
                         </div>
                     </div>
 
-                    
+                   
                     
                   <div style="display:flex; justify-content:center">
                     <button type="submit" class="btn btn-primary mr-2">Enviar</button>

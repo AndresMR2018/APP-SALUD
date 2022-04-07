@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -51,35 +50,13 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item d-none d-lg-flex">
+                    {{-- <li class="nav-item d-none d-lg-flex">
                         <a class="nav-link" href="#">
                             <span class="btn btn-primary">+ Create new</span>
                         </a>
-                    </li>
-                    <li class="nav-item dropdown d-none d-lg-flex">
-                        <div class="nav-link">
-                            <span class="dropdown-toggle btn btn-outline-dark" id="languageDropdown"
-                                data-toggle="dropdown">English</span>
-                            <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
-                                <a class="dropdown-item font-weight-medium" href="#">
-                                    French
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item font-weight-medium" href="#">
-                                    Espanol
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item font-weight-medium" href="#">
-                                    Latin
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item font-weight-medium" href="#">
-                                    Arabic
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
+                    </li> --}}
+                  
+                    {{-- <li class="nav-item dropdown">
                         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                             data-toggle="dropdown">
                             <i class="fas fa-bell mx-0"></i>
@@ -114,9 +91,9 @@
                                     </div>
                                 </div>
                                 <div class="preview-item-content">
-                                    <h6 class="preview-subject font-weight-medium">Settings</h6>
+                                    <h6 class="preview-subject font-weight-medium">Configuración</h6>
                                     <p class="font-weight-light small-text">
-                                        Private message
+                                        Mi perfil
                                     </p>
                                 </div>
                             </a>
@@ -195,21 +172,22 @@
                                 </div>
                             </a>
                         </div>
-                    </li>
+                    </li> --}}
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             <img src="{{ asset('administracion/images/faces/face5.jpg') }}" alt="profile" />
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" href="{{route('cliente.cuenta')}}">
                                 <i class="fas fa-cog text-primary"></i>
-                                Settings
+                                Mi perfil
                             </a>
+                            
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" onclick="">
                                 <i class="fas fa-power-off text-primary"></i>
-                                Logout
+                                Cerrar sesión
                             </a>
                         </div>
                     </li>

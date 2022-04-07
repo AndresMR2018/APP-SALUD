@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\NutricionistaController;
@@ -35,7 +36,9 @@ Route::post('/contactar',[HomeController::class, 'contactar'])->name('home.conta
 Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {
 Route::resource('administrador',AdminController::class);
 Route::resource('paciente',PacienteController::class);
-// Route::get('/registrar/paciente',[AdminController::class,'formPaciente'])->name('administrador.formPaciente');
+
+Route::get('/login-administrador',[LoginController::class,'loginAdmin'])->name('login.administrador');
+
 Route::get('/paciente/eliminar/{id}',[PacienteController::class,'eliminarPaciente'])->name('paciente.eliminar');
 Route::get('/paciente/datos-antropometricos',[PacienteController::class,'datosAntropometricos'])->name('paciente.datosAntropometricos');
 Route::post('/paciente/datos-antropometricos',[PacienteController::class,'guardarDatosAntropometricos'])->name('paciente.guardarDatosAntropometricos');
@@ -54,14 +57,18 @@ Route::post('/registrar',[RegController::class,'registrarAdmin'])->name('adminis
 Route::resource('nutricionista',NutricionistaController::class);
 });
 
+
 // ================================== RUTAS PARA NUTRICIONISTAS ============================ //
 Route::group(['prefix' => 'nutricionista', 'middleware'=>'nutri'], function () {
     Route::get('/',[NutricionistaController::class,'dashboard'])->name('nutricionista.dashboard');
+    Route::post('/login-nutricionista',[LoginController::class,'loginPaciente'])->name('login.nutricionista');
    });
 
 // ============================= RUTAS PARA CLIENTES ============================ //
-Route::group(['middleware'=>'cliente'], function () {
+Route::group(['middleware'=>'paciente'], function () {
     Route::get('/perfil',[ClienteController::class,'dashboard'])->name('cliente.dashboard');
+    Route::get('/mi-cuenta',[ClienteController::class,'miCuenta'])->name('cliente.cuenta');
+    Route::post('/login-paciente',[LoginController::class,'loginPaciente'])->name('login.paciente');
    });
 
 

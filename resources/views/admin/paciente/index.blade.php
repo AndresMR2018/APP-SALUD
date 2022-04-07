@@ -23,23 +23,17 @@
                                    
                                     <th>Nombre</th>
                                     <th>Apellido</th>
-                                    <th>Cedula</th>
-                                    <th>Telefono</th>
                                     <th>Tipo diabetes</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php
-                                $key = 0;
-                                @endphp
+                               
                                 @foreach ($pacientes as $key => $paciente)
                                     <tr>
                                       
                                         <td>{{ $paciente->nombre }}</td>
                                         <td>{{ $paciente->apellido }}</td>
-                                        <td>{{ $paciente->cedula }}</td>
-                                        <td>{{ $paciente->telefono }}</td>
                                         @if($paciente->tipo_diabetes==3)
                                         <td>Tipo gestacional</td>
                                         @else
@@ -156,7 +150,13 @@
         </div>
         <div class="modal-body" style="display:flex; flex-wrap:wrap; align-content:flex-start">
         
-            
+            <div>
+                @if(isset($nutricionista->imagen->url) && $sexos[$key]->sexo==1 )
+                <img class="img-thumbnail" style="max-width:200px; margin-top:80px;" src="{{$nutricionista->imagen->url}}">
+                @else
+                <img class="img-thumbnail" style="max-width:200px; margin-top:80px;" src="{{asset('img/mujer.png')}}">
+            @endif
+              </div>
            
             <div style="margin-left:20px;" >
               
@@ -177,50 +177,27 @@
                 </div>
                 
                 <div class="form-group">
-                  <label for="recipient-name"><strong>Correo:</strong> {{$paciente->correo}}</label>
+                  <label for="recipient-name"><strong>Correo:</strong> {{$paciente->email}}</label>
                   
                 </div>
 
                 <div class="form-group">
-                    <label for="recipient-name"><strong>Sexo:</strong> {{$paciente->sexo}}</label>
+                    
+                    <label for="recipient-name"><strong>Sexo:</strong>{{$sexos[$key]->sexo==1 ? 'Femenino' : 'Masculino'}}</label>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="recipient-name"><strong>Altura:</strong>{{$alturas[$key]->altura}} mts</label>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="recipient-name"><strong>Peso:</strong>{{$pesos[$key]->peso}} kg</label>
                     
                   </div>
 
                   <div class="form-group">
-                    <label for="recipient-name"><strong>Altura:</strong> {{$paciente->altura}}</label>
-                    
-                  </div>
-
-                  <div class="form-group">
-                    <label for="recipient-name"><strong>Peso:</strong> {{$paciente->peso}}</label>
-                    
-                  </div>
-
-                  {{-- @php 
-                
-                // $key = $key-1;
-                // $var = 1;
-                // $var = $key-1;
-                //   foreach($imcs as $key => $imc)
-                //   {
-                //       $imc = 
-                //   }
-                    
-               
-                 @endphp --}}
-
-                  <div class="form-group">
-                      @if(isset($imcs[$key]))
-                    <label for="recipient-name"><strong>IMC:</strong>{{$key}}</label>
-                    @else
-                    <label for="recipient-name"><strong>IMC:</strong>{{$imcs[$key]}}</label>
-                    @endif
-                    {{-- @php
-                    $var = 1;
-                    @endphp --}}
-                  </div>
-
-         
+                    <label for="recipient-name"><strong>IMC:</strong>{{$imcs[$key]->imc}} </label>
+                  </div>         
           </div>
           
         </div>
