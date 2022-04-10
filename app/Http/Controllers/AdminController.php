@@ -17,6 +17,7 @@ class AdminController extends Controller
 
     public function listarPacientes()
     {
+        dd("holii");
         $pacientes = User::role('Cliente')->get();
         return view('admin.paciente.index',compact('pacientes'));
     }

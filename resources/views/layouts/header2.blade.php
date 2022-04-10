@@ -38,8 +38,13 @@
                                             </a>
                            
                                         </li>
-
+                                        @if(auth()->check())
                                         <li class="dropdown">
+                                            <p>{{ auth()->user()->email }}</p>
+                                        </li>
+                                        @endif
+                                        <li class="dropdown">
+                                            
                                             <a onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();" class="dropdown-item dropdown-toggle active" href="{{route('login')}}">
                                                 Cerrar sesión

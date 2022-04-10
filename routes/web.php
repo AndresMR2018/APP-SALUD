@@ -31,6 +31,7 @@ Route::get('/contactanos',[HomeController::class,'contactanos'])->name('home.con
 Route::get('/nosotros',[HomeController::class, 'nosotros'])->name('home.nosotros');
 Route::post('/contactar',[HomeController::class, 'contactar'])->name('home.contactar');
 
+Route::post('/login2',[LoginController::class,'login'])->name('login2');
 
 // ============================= RUTAS PARA ADMINISTRADOR GLOBAL ============================ //
 Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {

@@ -35,6 +35,7 @@
                                      {{-- si el usuario esta logueado o iniciado sesion --}}
                                         @if(Auth::check())
                                         <li class="dropdown">
+                                            <p>{{ auth()->user()->email }}</p>
                                             <a onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();" class="dropdown-item dropdown-toggle active" href="{{route('login')}}">
                                                 Cerrar sesión

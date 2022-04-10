@@ -5,14 +5,19 @@ namespace App\Models;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
-    use HasFactory , HasRoles;
+    use HasFactory, HasRoles;
 
-    public $fillable = [
-        "email",
-        "password",
-    ];
+   
     protected $guard_name = 'web';
+
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
+    
 }

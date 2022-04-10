@@ -33,7 +33,7 @@
                                         <div class="box-content">
                                             <h4 class="color-primary font-weight-semibold text-4 text-uppercase mb-3">
                                                 SOY CLIENTE</h4>
-                                            <form method="POST" action="{{ route('login') }}" id="frmSignIn" class="needs-validation">
+                                            <form method="POST" action="{{ route('login2') }}" id="frmSignIn" class="needs-validation">
                                                 @csrf
                                                 <div class="form-row">
                                                     <div class="form-group col">

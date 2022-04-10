@@ -2,26 +2,27 @@
 
 namespace App\Models;
 
+use App\Models\Admin;
+use App\Models\Paciente;
+use App\Models\Nutricionista;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
 
-  
+    protected $guard_name = 'web';
+
     protected $fillable = [
         'name',
         'email',
         'password',
-        "cedula",
-        "apellido",
-        "telefono",
     ];
 
     protected $hidden = [
@@ -32,6 +33,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+   
 
     public function pacientes()
     {
@@ -40,8 +42,9 @@ class User extends Authenticatable
 
     public function administradores()
     {
-        return $this->hasMany(Admin::class);
+        return $this->hasOne(Admin::class);
     }
+
 
     public function nutricionistas()
     {

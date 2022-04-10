@@ -4,19 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
-class Paciente extends Model
+class Paciente extends Authenticatable
 {
-    use HasFactory, HasRoles;
+    use HasFactory , HasRoles;
 
     protected $guard_name = 'web';
 
     public $fillable=[
         "nombre",
         "apellido",
-        "email",
-        "password",
         "tipo_diabetes",
         "telefono",
         "cedula",
@@ -26,6 +25,10 @@ class Paciente extends Model
     public $timestamps = false;
 
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     
     public function imagen(){
         return $this->morphOne(Imagen::class, 'imageable');

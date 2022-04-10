@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('cedula');
             $table->text('especialidad');
             $table->string('telefono');
-            $table->string('correo');
-            $table->string('password');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
