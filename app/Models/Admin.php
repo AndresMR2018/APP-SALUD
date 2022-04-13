@@ -14,10 +14,10 @@ class Admin extends Authenticatable
    
     protected $guard_name = 'web';
 
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     
 }

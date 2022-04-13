@@ -20,7 +20,7 @@
                         <table id="order-listing" class="table">
                             <thead>
                                 <tr>
-                                   
+
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Tipo diabetes</th>
@@ -28,21 +28,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               
+
                                 @foreach ($pacientes as $key => $paciente)
                                     <tr>
-                                      
-                                        <td>{{ $paciente->nombre }}</td>
+
+                                        <td>{{ $paciente->nombre}}</td>
                                         <td>{{ $paciente->apellido }}</td>
-                                        @if($paciente->tipo_diabetes==3)
-                                        <td>Tipo gestacional</td>
+                                        @if ($paciente->tipo_diabetes == 3)
+                                            <td>Tipo gestacional</td>
                                         @else
-                                        <td>Tipo {{ $paciente->tipo_diabetes }}</td>
+                                            <td>Tipo {{ $paciente->tipo_diabetes }}</td>
                                         @endif
                                         <td>
-                                            <a  data-toggle="modal" data-target="#exampleModal-3{{$paciente->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            <a data-toggle="modal" data-target="#exampleModal-3{{ $paciente->id }}"
+                                                class="btn btn-info"><i class="fas fa-eye"></i></a>
                                             <a class="btn btn-outline-warning" data-toggle="modal"
-                                                data-target="#exampleModal-2{{ $paciente->id }}"><i class="fas fa-edit"></i></a>
+                                                data-target="#exampleModal-2{{ $paciente->id }}"><i
+                                                    class="fas fa-edit"></i></a>
                                             <a href="{{ route('paciente.eliminar', $paciente->id) }}"
                                                 class="btn btn-outline-danger"><i class="fas fa-trash"></i></a>
 
@@ -50,7 +52,7 @@
                                     </tr>
 
 
-                                    {{-- <div class="modal fade" id="exampleModal-2{{ $paciente->id }}" tabindex="-1"
+                                    <div class="modal fade" id="exampleModal-2{{ $paciente->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel-2" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -72,7 +74,7 @@
                                                                 class="col-sm-3 col-form-label">Nombre</label>
                                                             <div class="col-sm-9">
                                                                 <input name="name" type="text"
-                                                                    value="{{ $paciente->name }}" class="form-control"
+                                                                    value="{{ $paciente->nombre }}" class="form-control"
                                                                     id="exampleInputUsername2">
                                                             </div>
                                                         </div>
@@ -108,7 +110,7 @@
                                                                 class="col-sm-3 col-form-label">Correo electrónico</label>
                                                             <div class="col-sm-9">
                                                                 <input name="email" type="text"
-                                                                    value="{{ $paciente->email }}" class="form-control"
+                                                                    value="{{ $paciente->user->email }}" class="form-control"
                                                                     id="exampleInputUsername2">
                                                             </div>
                                                         </div>
@@ -134,81 +136,100 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
 
 
-{{-- MODAL DE DATOS ANTROPOMETRICOS --}}
+                                    {{-- MODAL DE DATOS ANTROPOMETRICOS --}}
 
-<div class="modal fade" id="exampleModal-3{{$paciente->id}}" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ModalLabel">Datos paciente</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" style="display:flex; flex-wrap:wrap; align-content:flex-start">
-        
-            <div>
-                @if(isset($nutricionista->imagen->url) && $sexos[$key]->sexo==1 )
-                <img class="img-thumbnail" style="max-width:200px; margin-top:80px;" src="{{$nutricionista->imagen->url}}">
-                @else
-                <img class="img-thumbnail" style="max-width:200px; margin-top:80px;" src="{{asset('img/mujer.png')}}">
-            @endif
-              </div>
-           
-            <div style="margin-left:20px;" >
-              
-                <div class="form-group">
-                  <label for="recipient-name" ><strong>Nombre:</strong> {{$paciente->nombre}}</label>
-                 
-                </div>
-                <div class="form-group">
-                  <label for="recipient-name"><strong>Apellido:</strong> {{$paciente->apellido}}</label>
-               
-                </div>
-                <div class="form-group">
-                  <label for="recipient-name"><strong>Cedula:</strong> {{$paciente->cedula}}</label>
-                  
-                </div>
-                <div class="form-group">
-                  <label for="recipient-name"><strong>Teléfono:</strong> {{$paciente->telefono}}</label>
-                </div>
-                
-                <div class="form-group">
-                  <label for="recipient-name"><strong>Correo:</strong> {{$paciente->email}}</label>
-                  
-                </div>
+                                    <div class="modal fade" id="exampleModal-3{{ $paciente->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="ModalLabel">Datos paciente</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body"
+                                                    style="display:flex; flex-wrap:wrap; align-content:flex-start">
 
-                <div class="form-group">
-                    
-                    <label for="recipient-name"><strong>Sexo:</strong>{{$sexos[$key]->sexo==1 ? 'Femenino' : 'Masculino'}}</label>
-                  </div>
+                                                    {{-- <div>
+                                                        @if (isset($paciente->imagen->url) && $sexos[$key]->sexo == 1)
+                                                            <img class="img-thumbnail"
+                                                                style="max-width:200px; margin-top:80px;"
+                                                                src="{{ $paciente->imagen->url }}">
+                                                        @else
+                                                            <img class="img-thumbnail"
+                                                                style="max-width:200px; margin-top:80px;"
+                                                                src="{{ asset('img/mujer.png') }}">
+                                                        @endif
+                                                    </div> --}}
 
-                  <div class="form-group">
-                    <label for="recipient-name"><strong>Altura:</strong>{{$alturas[$key]->altura}} mts</label>
-                  </div>
+                                                    <div style="margin-left:20px;">
 
-                  <div class="form-group">
-                    <label for="recipient-name"><strong>Peso:</strong>{{$pesos[$key]->peso}} kg</label>
-                    
-                  </div>
+                                                        <div class="form-group">
+                                                            <label for="recipient-name"><strong>Nombre:</strong>
+                                                                {{ $paciente->nombre }}</label>
 
-                  <div class="form-group">
-                    <label for="recipient-name"><strong>IMC:</strong>{{$imcs[$key]->imc}} </label>
-                  </div>         
-          </div>
-          
-        </div>
-        {{-- <div class="modal-footer">
-          <button type="button" class="btn btn-success">Send message</button>
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-        </div> --}}
-      </div>
-    </div>
-  </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="recipient-name"><strong>Apellido:</strong>
+                                                                {{ $paciente->apellido }}</label>
 
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="recipient-name"><strong>Cedula:</strong>
+                                                                {{ $paciente->cedula }}</label>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="recipient-name"><strong>Teléfono:</strong>
+                                                                {{ $paciente->telefono }}</label>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="recipient-name"><strong>Correo:</strong>
+                                                                {{ $paciente->user->email }}</label>
+                                                        </div>
+                                                      
+                                                        @foreach($paciente->dato_antropometrico as $kp => $data)
+                                                        @if($loop->last)
+                                                        <div class="form-group">
+
+                                                            <label
+                                                                for="recipient-name"><strong>Sexo:</strong>{{ $data->sexo == 1 ? 'Femenino' : 'Masculino' }}</label>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="recipient-name"><strong>Altura:</strong>{{ $data->altura }}
+                                                                mts</label>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="recipient-name"><strong>Peso:</strong>{{ $data->peso }}
+                                                                kg</label>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="recipient-name"><strong>IMC:</strong>{{ $data->imc }}
+                                                            </label>
+                                                        </div>
+                                                        @endif
+                                                        @endforeach
+                                                      
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </tbody>
                         </table>

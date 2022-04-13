@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Nutricionista;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreNutricionistaRequest;
 use App\Http\Requests\UpdateNutricionistaRequest;
@@ -16,8 +18,63 @@ class NutricionistaController extends Controller
     public function index()
     {
         $nutricionistas = Nutricionista::all();
-
+    
         return view('admin.nutricionistas.index',compact('nutricionistas'));
+    }
+
+    public function miCuenta(){
+        $user = User::find(Auth::id());
+        $nutricionista = Nutricionista::where('user_id',$user->id)->first();
+        return view('nutri.cuenta.cuenta',compact('nutricionista'));
+    }
+
+    public function formCuenta()
+    {
+        $user = User::find(Auth::id());
+
+   $nutricionista =Nutricionista::where('user_id',$user->id)->first();
+        return view('nutri.cuenta.editarCuenta',compact('nutricionista'));
+    }
+
+    public function updateCuenta(Request $request)
+    {
+        // dd($request);
+        $hashpass = Hash::make($request->password);
+        $user = User::find(Auth::id());
+        if($request->password!=null)
+            $user->update(["password"=>$hashpass]);
+
+       $nutricionista = Nutricionista::where('user_id',$user->id)->first();
+       $nutricionista->update([
+        "nombre"=>$request->nombre,
+        "apellido"=>$request->apellido,
+        "especialidad"=>$request->especialidad,
+        "cedula"=>$request->cedula,
+        "telefono"=>$request->telefono,
+       ]);
+
+       if (request()->hasFile('imagen')) {
+        //    dd("hola");
+        $url="";
+      $file = $request->imagen;
+          $elemento= Cloudinary::upload($file->getRealPath(),['folder'=>'nutricionista']);
+          $public_id = $elemento->getPublicId();
+          $url = $elemento->getSecurePath();
+    if(is_null($nutricionista->imagen)){
+          $nutricionista->imagen()->create([
+              'url'=>$url,
+              'public_id'=>$public_id
+              ]);
+    }else{
+          $pid = $nutricionista->imagen->public_id;
+          Cloudinary::destroy($pid);//Eliminamos la imagen anterior de cloud
+          $nutricionista->imagen()->update([
+              'url'=>$url,
+              'public_id'=>$public_id
+              ]);
+    }
+    }
+       return back();
     }
 
     public function dashboard(){
@@ -37,14 +94,20 @@ class NutricionistaController extends Controller
     {
         // dd($request);
         $hashpass = Hash::make($request->password);
-        $nutricionista = Nutricionista::create([
+        $user = User::create([
+            // "name"=>$request->nombre,
+            "email"=>$request->correo,
+            "password"=>$hashpass,
+        ]);
+        $nutricionista = $user->nutricionistas()->create([
             "nombre"=>$request->nombre,
             "apellido"=>$request->apellido,
             "cedula"=>$request->cedula,
             "telefono"=>$request->telefono,
             "correo"=>$request->correo,
-            "password"=>$hashpass,
-            "especialidad"=>$request->especialidad
+            
+            "especialidad"=>$request->especialidad,
+            "user_id"=>$user->id
         ]);
 
         

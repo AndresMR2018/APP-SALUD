@@ -2,7 +2,7 @@
 @section('contenido')
 <div class="page-header">
     <h3 class="page-title">
-       Mi perfil
+       Mi perfil cliente
     </h3>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -24,7 +24,7 @@
                         <label for="exampleInputUsername2"
                             class="col-sm-3 col-form-label">Nombre</label>
                         <div class="col-sm-9">
-                            <input  name="nombre" type="text" value="{{$paciente->nombre}}" class="form-control" id="exampleInputUsername2"
+                            <input  name="nombre" type="text" value="" class="form-control" id="exampleInputUsername2"
                                 disabled>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                         <label for="exampleInputEmail2"
                             class="col-sm-3 col-form-label">Apellido</label>
                         <div class="col-sm-9">
-                            <input name="apellido" type="text" value="{{$paciente->apellido}}" class="form-control" id="exampleInputEmail2"
+                            <input name="apellido" type="text" value="" class="form-control" id="exampleInputEmail2"
                                 disabled>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                         <label for="exampleInputEmail2"
                             class="col-sm-3 col-form-label">Cédula</label>
                         <div class="col-sm-9">
-                            <input name="cedula" type="text" value="{{$paciente->cedula}}" class="form-control" id="exampleInputEmail2"
+                            <input name="cedula" type="text" value="" class="form-control" id="exampleInputEmail2"
                                 disabled>
                         </div>
                     </div>

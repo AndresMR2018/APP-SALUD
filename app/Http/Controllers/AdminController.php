@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -20,6 +22,30 @@ class AdminController extends Controller
         dd("holii");
         $pacientes = User::role('Cliente')->get();
         return view('admin.paciente.index',compact('pacientes'));
+    }
+
+    public function formCuenta()
+    {
+        $administrador =Admin::find(Auth::id());
+        return view('admin.cuenta.editarCuenta',compact('administrador'));
+    }
+
+    public function updateCuenta(Request $request)
+    {
+        $hashpass = Hash::make($request->password);
+       $user = User::find(Auth::id());
+       
+       if($request->password!=null)
+            $user->update(["password"=>$hashpass]);
+
+       return back();
+    }
+
+    public function miCuenta(){
+        $administrador =Admin::find(Auth::id());
+        // dd($administrador);
+
+        return view('admin.cuenta.cuenta',compact('administrador'));
     }
 
   
@@ -57,24 +83,13 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, $id)
     {
         // dd($request,$id);
@@ -94,12 +109,7 @@ class AdminController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         

@@ -40,7 +40,7 @@
                     <td>{{$nutricionista->especialidad}}</td>
                  
                  
-                    <td>{{$nutricionista->correo}}</td>
+                    <td>{{$nutricionista->user->email}}</td>
                     
                     <td>
                       <a title="Ver más" data-toggle="modal" data-target="#exampleModal-3{{$nutricionista->id}}" class="btn btn-outline-info"><i class="fa fa-eye"></i></a>
@@ -106,7 +106,7 @@
                                 <label for="exampleInputUsername2"
                                     class="col-sm-3 col-form-label">Correo electrónico</label>
                                 <div class="col-sm-9">
-                                    <input  name="correo" type="text" value="{{$nutricionista->correo}}" class="form-control" id="exampleInputUsername2"
+                                    <input  name="correo" type="text" value="{{$nutricionista->user->email}}" class="form-control" id="exampleInputUsername2"
                                         >
                                 </div>
                             </div>
@@ -142,11 +142,14 @@
                           </button>
                         </div>
                         <div class="modal-body" style="display:flex; flex-wrap:wrap; align-content:flex-start">
-                        
+                          
                             <div>
+                              @if(isset($nutricionista->imagen->url)  )
                               <img class="img-thumbnail" style="max-width:200px;" src="{{$nutricionista->imagen->url}}">
-  
-                            </div>
+  @else
+  <img class="img-thumbnail" style="max-width:200px; margin-top:80px;" src="{{asset('img/mujer.png')}}">
+        @endif                    
+</div>
                            
                             <div style="margin-left:20px;" >
                               
@@ -167,7 +170,7 @@
                                   
                                 </div>
                                 <div class="form-group">
-                                  <label for="recipient-name"><strong>Correo:</strong> {{$nutricionista->correo}}</label>
+                                  <label for="recipient-name"><strong>Correo:</strong> {{$nutricionista->user->email}}</label>
                                   
                                 </div>
 

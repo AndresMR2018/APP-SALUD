@@ -17,14 +17,14 @@ class PacienteController extends Controller
     {
         // $lastRecordDate = DatosAntropometrico::all()->sortByDesc('created_at')->take(1)->toArray();
         // dd($lastRecordDate);
-        $imcs = DB::table('datos_antropometricos')->select('imc')->latest()->get();
-        $sexos = DB::table('datos_antropometricos')->select('sexo')->latest()->get();
-        $alturas = DB::table('datos_antropometricos')->select('altura')->latest()->get();
-        $pesos = DB::table('datos_antropometricos')->select('peso')->latest()->get();
- 
+        // $imcs = DB::table('datos_antropometricos')->select('imc')->latest()->get();
+        // $sexos = DB::table('datos_antropometricos')->select('sexo')->latest()->get();
+        // $alturas = DB::table('datos_antropometricos')->select('altura')->latest()->get();
+        // $pesos = DB::table('datos_antropometricos')->select('peso')->latest()->get();
+        // dd($alturas,$sexos,$pesos,$imcs);
         $pacientes = Paciente::all();
 
-        return view('admin.paciente.index',compact('pacientes','imcs','sexos','alturas','pesos'));
+        return view('admin.paciente.index',compact('pacientes'));
     }
 
     

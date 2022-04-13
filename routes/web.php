@@ -9,6 +9,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\NutricionistaController;
+use App\Http\Controllers\AdministratorsController;
+use App\Http\Controllers\AlimentoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +29,8 @@ Auth::routes();
 
 // ============================= RUTAS PUBLICAS ============================ //
 
+Route::get('/admins/login',[AdministratorsController::class,'showLoginForm']);
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contactanos',[HomeController::class,'contactanos'])->name('home.contactanos');
 Route::get('/nosotros',[HomeController::class, 'nosotros'])->name('home.nosotros');
@@ -36,19 +41,16 @@ Route::post('/login2',[LoginController::class,'login'])->name('login2');
 // ============================= RUTAS PARA ADMINISTRADOR GLOBAL ============================ //
 Route::group(['prefix' => 'admin', 'middleware'=>'admin'], function () {
 Route::resource('administrador',AdminController::class);
-Route::resource('paciente',PacienteController::class);
+
+
+Route::get('/mi-perfil',[AdminController::class,'miCuenta'])->name('admin.cuenta');
+Route::get('/editar-perfil',[AdminController::class,'formCuenta'])->name('admin.editarCuenta');
+Route::post('/editar-perfil',[AdminController::class,'updateCuenta'])->name('admin.updateCuenta');
 
 Route::get('/login-administrador',[LoginController::class,'loginAdmin'])->name('login.administrador');
 
-Route::get('/paciente/eliminar/{id}',[PacienteController::class,'eliminarPaciente'])->name('paciente.eliminar');
-Route::get('/paciente/datos-antropometricos',[PacienteController::class,'datosAntropometricos'])->name('paciente.datosAntropometricos');
-Route::post('/paciente/datos-antropometricos',[PacienteController::class,'guardarDatosAntropometricos'])->name('paciente.guardarDatosAntropometricos');
-Route::post('/paciente/actualizar',[PacienteController::class,'actualizarPaciente'])->name('paciente.actualizar');
 
-
-// Route::get('/create',[AdminController::class,'create'])->name('administracion.create');
 Route::get('/listado',[AdminController::class,'listar'])->name('administrador.listar');
-// Route::post('/update',[AdminController::class,'update'])->name('administracion.update');
 Route::get('/',[AdminController::class,'dashboard'])->name('administrador.dashboard');
 
 // Route::post('/guardar',[AdminController::class,'store'])->name('administracion.store');
@@ -62,8 +64,25 @@ Route::resource('nutricionista',NutricionistaController::class);
 // ================================== RUTAS PARA NUTRICIONISTAS ============================ //
 Route::group(['prefix' => 'nutricionista', 'middleware'=>'nutri'], function () {
     Route::get('/',[NutricionistaController::class,'dashboard'])->name('nutricionista.dashboard');
+    Route::get('/mi-cuenta',[NutricionistaController::class,'miCuenta'])->name('nutricionista.cuenta');
+    Route::get('/editar-perfil',[NutricionistaController::class,'formCuenta'])->name('nutricionista.editarCuenta');
+    Route::post('/editar-perfil',[NutricionistaController::class,'updateCuenta'])->name('nutricionista.updateCuenta');
     Route::post('/login-nutricionista',[LoginController::class,'loginPaciente'])->name('login.nutricionista');
    });
+
+
+// ================================= RUTAS PARA ADMINS Y NUTRICIONISTAS ===================== //
+Route::group(['prefix' => 'nutricionista','middleware'=>'admin_nutri'],function () {
+    Route::resource('alimento',AlimentoController::class);
+    Route::resource('paciente',PacienteController::class);
+    Route::get('/paciente/eliminar/{id}',[PacienteController::class,'eliminarPaciente'])->name('paciente.eliminar');
+    Route::get('/paciente/datos-antropometricos',[PacienteController::class,'datosAntropometricos'])->name('paciente.datosAntropometricos');
+    Route::post('/paciente/datos-antropometricos',[PacienteController::class,'guardarDatosAntropometricos'])->name('paciente.guardarDatosAntropometricos');
+    Route::post('/paciente/actualizar',[PacienteController::class,'actualizarPaciente'])->name('paciente.actualizar');
+
+});
+
+
 
 // ============================= RUTAS PARA CLIENTES ============================ //
 Route::group(['middleware'=>'paciente'], function () {

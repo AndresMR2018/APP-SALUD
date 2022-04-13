@@ -19,8 +19,8 @@ class User extends Authenticatable
 
     protected $guard_name = 'web';
 
-    protected $fillable = [
-        'name',
+    public $fillable = [
+        // 'name',
         'email',
         'password',
     ];
@@ -37,7 +37,7 @@ class User extends Authenticatable
 
     public function pacientes()
     {
-        return $this->hasMany(Paciente::class);
+        return $this->hasOne(Paciente::class);
     }
 
     public function administradores()
@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function nutricionistas()
     {
-        return $this->hasMany(Nutricionista::class);
+        return $this->hasOne(Nutricionista::class);
     }
 }

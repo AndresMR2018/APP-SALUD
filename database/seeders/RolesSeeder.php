@@ -5,15 +5,12 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use App\Models\DatosAntropometrico;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RolesSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+    
     public function run()
     {
         Role::create(["name"=>"Administrador"]);
@@ -24,13 +21,15 @@ class RolesSeeder extends Seeder
             "email"=>"erik@gmail.com",
             "password"=>'$2y$10$Ztoy.56ZbM.7kfG60rosJuERbO4I5HDnBceACPNs7SVgADd9Xw62m'
         ]);
+        $user1->assignRole('Administrador');
         $admin = $user1->administradores()->create();
-        $admin->assignRole('Administrador');
+        
 
         $user2 = User::create([
             "email"=>"alvaro@gmail.com",
             "password"=>'$2y$10$Ztoy.56ZbM.7kfG60rosJuERbO4I5HDnBceACPNs7SVgADd9Xw62m'
         ]);
+        $user2->assignRole('Nutricionista');
         $nutri = $user2->nutricionistas()->create([
             "nombre"=>"Alvaro",
             "apellido"=>"Salazar",
@@ -38,13 +37,14 @@ class RolesSeeder extends Seeder
             "especialidad"=>"Terapeuta",
             "telefono"=>"0988703030",
         ]);
-        $nutri->assignRole('Nutricionista');
+        // $nutri->assignRole('Nutricionista');
 
 
         $user3 = User::create([
             "email"=>"andres@gmail.com",
             "password"=>'$2y$10$Ztoy.56ZbM.7kfG60rosJuERbO4I5HDnBceACPNs7SVgADd9Xw62m'
         ]);
+        $user3->assignRole('Paciente');
         $paciente = $user3->pacientes()->create([
             "nombre"=>"Andres",
             "apellido"=>"Morales",
@@ -53,6 +53,13 @@ class RolesSeeder extends Seeder
             "tipo_diabetes"=>1,
             "edad"=>23
         ]);
-        $paciente->assignRole('Paciente');
+        DatosAntropometrico::create([
+            "altura"=>1.70,
+            "peso"=>60,
+            "sexo"=>1,
+            "imc"=>20,
+            "paciente_id"=>$paciente->id
+        ]);
+      
     }
 }

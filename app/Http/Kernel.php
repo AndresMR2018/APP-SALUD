@@ -58,6 +58,7 @@ class Kernel extends HttpKernel
         'paciente'=> \App\Http\Middleware\ClienteMiddleware::class,
         'admin'=> \App\Http\Middleware\AdminMiddleware::class,
         'nutri'=> \App\Http\Middleware\NutriMiddleware::class,
+        'admin_nutri'=> \App\Http\Middleware\AdminNutriMiddleware::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,

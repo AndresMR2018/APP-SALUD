@@ -18,8 +18,10 @@ class Nutricionista extends Authenticatable
         "cedula",
         "telefono",
         "especialidad",
+        "user_id",
+        
     ];
-
+    // nutricionista->user->name
     public function user()
     {
         return $this->belongsTo(User::class);

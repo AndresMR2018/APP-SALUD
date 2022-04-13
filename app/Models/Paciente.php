@@ -19,12 +19,13 @@ class Paciente extends Authenticatable
         "tipo_diabetes",
         "telefono",
         "cedula",
-        "edad"
+        "edad",
+
     ];
 
     public $timestamps = false;
 
-
+    
     public function user()
     {
         return $this->belongsTo(User::class);
